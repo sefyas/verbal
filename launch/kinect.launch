@@ -8,6 +8,6 @@
     <arg name="camera" value="$(arg camera)"/>
     <arg name="depth_frame_id" value="head_mount_kinect_ir_optical_frame" />
     <arg name="publish_tf" value="false"/>
-   </include>
+  </include>
 
  </launch>
