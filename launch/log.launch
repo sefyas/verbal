@@ -3,6 +3,9 @@
   <arg name="address" default="/home/yasaman/Data/VPbD"/>
   <arg name="pid_n_cid" default="PID00_0_0"/>
 
-  <node pkg="rosbag" type="record" name="vpbd_kinect" args="$(arg camera)/depth_registered/image_raw $(arg camera)/depth_registered/camera_info $(arg camera)/rgb/image_raw $(arg camera)/rgb/camera_info joint_states -O $(arg address)/$(arg pid_n_cid) --duration=60"/>
+    <!-- Turn on the sound capture -->
+  <include file="$(find audio_capture)/launch/capture.launch">  </include>
+
+  <node pkg="rosbag" type="record" name="vpbd_kinect" args="$(arg camera)/depth_registered/image_raw $(arg camera)/depth_registered/camera_info $(arg camera)/rgb/image_raw $(arg camera)/rgb/camera_info joint_states /audio -O $(arg address)/$(arg pid_n_cid)"/>
 
 </launch>
