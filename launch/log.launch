@@ -3,9 +3,15 @@
   <arg name="address" default="/home/yasaman/Data/VPbD"/>
   <arg name="pid_n_cid" default="PID00_0_0"/>
 
-    <!-- Turn on the sound capture -->
+  <!-- Disable gripper controllers -->
+  <node pkg="pr2_controller_manager" type="unspawner" name="vpbd_gripper_stp" args="r_gripper_controller l_gripper_controller"/>
+
+  <!-- Turn on the custom mannequin mode (no head) -->
+  <include file="$(find verbal)/launch/mannequin_nohead.launch"> </include>
+
+  <!-- Turn on the sound capture -->
   <include file="$(find audio_capture)/launch/capture.launch">  </include>
-
-  <node pkg="rosbag" type="record" name="vpbd_kinect" args="$(arg camera)/depth_registered/image_raw $(arg camera)/depth_registered/camera_info $(arg camera)/rgb/image_raw $(arg camera)/rgb/camera_info joint_states /audio -O $(arg address)/$(arg pid_n_cid)"/>
-
+  
+  <!-- Collect the data -->
+  <node pkg="rosbag" type="record" name="vpbd_log" args="$(arg camera)/depth_registered/image_raw $(arg camera)/depth_registered/camera_info $(arg camera)/rgb/image_raw $(arg camera)/rgb/camera_info joint_states /audio -O $(arg address)/$(arg pid_n_cid)"/>
 </launch>

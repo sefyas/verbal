@@ -1,0 +1,9 @@
+<launch>
+  <!-- Disable gripper controllers -->
+  <node pkg="pr2_controller_manager" type="unspawner" name="vpbd_gripper_stp" args="r_gripper_controller l_gripper_controller"/>
+
+  <!-- Turn on the custom mannequin mode (no head) -->
+  <include file="$(find verbal)/launch/mannequin_nohead.launch"> </include>
+
+
+</launch>

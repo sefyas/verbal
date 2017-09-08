@@ -1,0 +1,10 @@
+<launch>
+  <arg name="address" default="/home/yasaman/Data/VPbD"/>
+  <arg name="pid" default="PID00"/>
+
+  <!-- Turn on the sound capture -->
+  <include file="$(find audio_capture)/launch/capture.launch">  </include>
+  
+  <!-- Collect the data -->
+  <node pkg="rosbag" type="record" name="vpbd_audio_log" args="/audio -O $(arg address)/$(arg pid)"/>
+</launch>
